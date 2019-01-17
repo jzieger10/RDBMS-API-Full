@@ -107,10 +107,8 @@ router
     router
 	.route("/:id/students")
 	.get((req, res) => {
-        
-        db('cohorts')
-            // .join('students', 'cohorts.id', '=', 'cohorts.id')
-			.where({ id: req.params.id })
+        db('students')
+			.where({ cohort_id: req.params.id })
 			.then(students => {
 				res.status(201).json(students);
 			})
