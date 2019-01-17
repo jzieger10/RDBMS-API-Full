@@ -102,7 +102,25 @@ router
 					})
 				)
         }
-    ); 
+    );
+    
+    router
+	.route("/:id/students")
+	.get((req, res) => {
+        
+        db('cohorts')
+            // .join('students', 'cohorts.id', '=', 'cohorts.id')
+			.where({ id: req.params.id })
+			.then(students => {
+				res.status(201).json(students);
+			})
+			.catch(err =>
+				res.status(500).json({
+					error: "There has been a server error on the GET route",
+					err,
+				})
+			);
+	})
 
 	
 
